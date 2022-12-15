@@ -1,0 +1,78 @@
+﻿@model IEnumerable<CustomerXtreme.Customer>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Customer Information</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+
+<p>
+    @using (Html.BeginForm("Index", "Home", FormMethod.Get))
+    {
+        <b> Search by :</b> @Html.RadioButton("searchby", "Name", true)<b> Name</b>
+        @Html.RadioButton("searchby", "Code") <b> Code</b><br />
+        @Html.TextBox("search") <input type="submit" value=" Search" />
+    }
+</p>
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.password)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.dob)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.email)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.phone)
+        </th>
+        <th></th>
+    </tr>
+    @if (Model.Count() == 0)
+    {
+        <tr>
+            <td colspan="5">
+                No record found
+            </td>
+        </tr>
+    }
+    else
+    {
+        foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.password)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.dob)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.email)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.phone)
+                </td>
+                <td>
+                    @Html.ActionLink("Edit", "Edit", new { id = item.code }) |
+                    @Html.ActionLink("Details", "Details", new { id = item.code }) |
+                    @Html.ActionLink("Delete", "Delete", new { id = item.code })
+                </td>
+            </tr>
+        }
+    }
+
+</table>

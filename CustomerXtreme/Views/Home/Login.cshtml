@@ -1,0 +1,72 @@
+﻿@model CustomerXtreme.Customer
+
+@{
+    ViewBag.Title = "Login";
+    //HtmlHelper.ClientValidationEnabled = false;
+}
+
+<style type="text/css">
+    input[type=text], [type=password] {
+        width: 90%;
+        padding: 10px;
+        border: 0;
+        border-radius: 10px;
+    }
+
+    input[type=submit] {
+        padding: 10px;
+        border: 0;
+        border-radius: 10px;
+    }
+
+    center {
+        margin: auto;
+        width: 35%;
+        height: 60%;
+        border: 0;
+        padding: 50px;
+        background-size: cover;
+    }
+</style>
+
+@using (Html.BeginForm("Login", "Home", FormMethod.Post))
+{
+    <center>
+        <fieldset>
+            <legend>Login</legend>
+
+            @Html.AntiForgeryToken()
+            @Html.ValidationSummary(false, "", new { @class = "text-danger" })
+            @if (@ViewBag.Message != null)
+            {
+                <div style="border: 1px solid red">
+                    @ViewBag.Message
+                </div>
+            }
+            <table>
+                <tr>
+                    <td>@Html.Label("Username")</td>
+                    <td><input type="text" class="name" name="name" placeholder="Name" required="" /></td>
+
+                </tr>
+                <tr>
+                    <td>
+                        @Html.Label("Password")
+                    </td>
+                    <td>
+                        <input type="password" class="password" name="Password" placeholder="Password" required="" />
+                    </td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td>
+                        <input type="submit" value="Login" />
+                    </td>
+                    <td></td>
+                </tr>
+            </table>
+        </fieldset>
+    </center>
+}
+
+
